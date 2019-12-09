@@ -9,130 +9,82 @@ const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
   verify: ['delivery'],
-  company: 'Stark Tower',
-  name: 'Tony Stark',
-  street1: '200 Park Ave',
-  // street2: '',
-  city: 'New York',
-  state: 'NY',
-  zip: '10079',
+  company: 'Utah State Tax Commission',
+  name: 'Josh Quarnberg',
+  street1: '150 E Center St',
+  street2: 'Ste. 1300',
+  city: 'Provo',
+  state: 'UT',
+  zip: '84606',
   country: 'US',
-  phone: '8012220000',
-  email: 'email@email.com',
-
-  // company: "The UPS Store",
-  // name: 'John Smith',
-  // street1: '358 S 700 E',
-  // street2: 'STE B',
-  // city: 'Salt Lake City',
-  // state: 'UT',
-  // zip: '84102',
-  // country: 'US',
-  // phone: '4165555556',
-  // email: 'TEST123@YOPMAIL.COM',
+  phone: '8012972100',
+  email: 'email@email.com'
 });
 
 const fromAddress = new api.Address({
-  company: "The UPS Store",
-  name: 'John Smith',
-  street1: '358 S 700 E',
-  street2: 'STE B',
-  city: 'Salt Lake City',
+  // company: "The UPS Store",
+  name: 'Jeremy Bezzant',
+  street1: '1901 W 550 N',
+  // street2: '',
+  city: 'Lehi',
   state: 'UT',
-  zip: '84102',
+  zip: '84043',
   country: 'US',
-  phone: '4165555556',
-  email: 'TEST123@YOPMAIL.COM',
-
-
-  //  company: 'Stark Tower',
-  //  name: 'Tony Stark',
-  //  street1: '200 Park Ave',
-  //  // street2: '',
-  //  city: 'New York',
-  //  state: 'NY',
-  //  zip: '10079',
-  //  country: 'US',
-  //  phone: '8012220000',
-  //  email: 'email@email.com',
+  phone: '8011001234',
+  email: 'testing@email.com'
 });
 
 
-fromAddress.save().then(console.log).catch(console.log);
+// fromAddress.save().then(console.log).catch(console.log);
 
-toAddress.save().then(console.log).catch(console.log);
+// toAddress.save().then(console.log).catch(console.log);
 
 // This one shows errors
-// fromAddress.save().then(r => console.log(JSON.stringify(r))).catch(console.log);
-// toAddress.save().then(r => console.log(JSON.stringify(r))).catch(console.log);
+fromAddress.save().then(r => console.log(JSON.stringify(r))).catch(console.log);
+toAddress.save().then(r => console.log(JSON.stringify(r))).catch(console.log);
 
 const parcel = new api.Parcel({
   // predefined_package: 'Parcel',
-  length: 10,
-  width: 10,
-  height: 10,
-  weight: 2.4,
+  length: 12,
+  width: 12,
+  height: 18,
+  weight: 36,
 });
 
 
-parcel.save().then(console.log);
+// parcel.save().then(console.log);
 
 
 const shipment = new api.Shipment({
   to_address: toAddress,
   from_address: fromAddress,
   parcel: parcel,
-  // carrier: 'UPS',
-  reference: '1234',
-  // is_return: true,
     options: {
-      // label_date: '2019-08-27',
-      // endorsement: 'RETURN_SERVICE_REQUESTED'
-      // label_format: 'PDF',
-      // hold_for_pickup: true,
-      // label_size: '4x6',
-      // postage_label_inline: true,
-      // additional_handling: true,
-      // delivery_confirmation: 'ADULT_SIGNATURE_RESTRICTED',
-      // registered_mail: true,
-      // return_receipt: true,
-      // alcohol: true,
-      // currency: 'USD'
-      // invoice_number: '6789',
-      // print_custom_1_barcode: true,
-      // print_custom_1_code: 'TESTING 123',
-      // print_custom_1: 'TEST',
-      // print_custom_2_code: 'DP',
-      // print_custom_2: '123456',
-      // print_custom_3_code: 'IK',
-      // print_custom_3: '7890',
-      // pickup_min_datetime: '2019-07-18T07:00:00.000Z',
-      // pickup_max_datetime: '2019-07-22T07:00:00.000Z',
-      // delivery_min_datetime: '2019-07-18T07:00:00.000Z',
-      // delivery_max_datetime: '2019-07-22T07:00:00.000Z',
-      // handling_instructions: 'LEAVE AT DOOR'
-      cost_center: 'howdy'
+      print_custom_1: 'Goods or Documents',
+      // print_custom_2: 'Please Work',
+      // print_custom_3: 'Why Me',
+      // print_custom_1_code: 'BM',
+      // print_custom_2_code: '9V',
+      // print_custom_3_code: 'ON'
     },
-    carrier_accounts: ['ca_b892e3d3ac674d6e9ae14d074f328663']
+    carrier_accounts: ['ca_d504e1e42a324bc0aede62289b1ea244']
 });
 
 
-// shipment.save().then(console.log).catch(console.log);
+shipment.save().then(console.log).catch(console.log);
 
 
 
 //============buy shipment by lowest rate============
-// shipment.save().then(buyShipment => {
-//   shipment.buy(shipment.lowestRate())
-//     .then(console.log).catch(console.log);
-// }).catch(console.log);
+shipment.save().then(buyShipment => {
+  shipment.buy(shipment.lowestRate())
+    .then(console.log).catch(console.log);
+}).catch(console.log);
 
 
 
 // ============Buy Shipment by ID============
-// api.Shipment.retrieve('shp_08b5fcebd98044ba98f520d89ff76825').then(s => {
-//   s.buy('rate_2217cd1c93e64f6b87f0dccbea43b3a6').then(console.log).catch(console.log);
-// }).catch(console.log);
+//  
 
 
 
